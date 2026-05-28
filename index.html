@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Video Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --border: #1e1e2e;
+  --accent: #e8ff47;
+  --accent2: #ff6b47;
+  --text: #e8e8f0;
+  --muted: #5a5a72;
+  --card: #13131c;
+  --card-hover: #16161f;
+  --radius: 8px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── 헤더 ── */
+header {
+  padding: 3rem 2rem 2rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(232,255,71,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+h1 span { color: var(--accent); }
+.meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-align: right;
+  line-height: 2;
+}
+.meta strong { color: var(--accent); }
+
+/* ── 툴바 ── */
+.toolbar {
+  max-width: 1280px;
+  margin: 1.5rem auto 0;
+  padding: 0 2rem 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+}
+.search-wrap {
+  flex: 1; min-width: 200px;
+  position: relative;
+}
+.search-wrap svg {
+  position: absolute; left: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted); pointer-events: none;
+}
+input[type=search] {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  padding: 0.6rem 1rem 0.6rem 2.4rem;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input[type=search]:focus { border-color: var(--accent); }
+select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  outline: none; cursor: pointer;
+  transition: border-color 0.2s;
+}
+select:focus { border-color: var(--accent); }
+
+/* 뷰 토글 */
+.view-toggle { display: flex; gap: 4px; }
+.view-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  width: 34px; height: 34px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.view-btn.active, .view-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.count-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  white-space: nowrap;
+  margin-left: auto;
+}
+.count-badge strong { color: var(--accent); }
+
+/* ── 메인 ── */
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+}
+
+/* ── 폴더 섹션 ── */
+.folder-section { margin-bottom: 3rem; }
+.folder-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.folder-label::before {
+  content: '▶'; color: var(--accent); font-size: 0.55rem;
+}
+
+/* ── 그리드 뷰 ── */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+}
+.grid-item {
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: default;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.35s ease both;
+}
+.grid-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+  z-index: 1;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.thumb-wrap {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #0d0d14;
+  position: relative;
+  overflow: hidden;
+}
+.thumb-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.grid-item:hover .thumb-wrap img {
+  transform: scale(1.05);
+}
+.thumb-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--border);
+  font-size: 2rem;
+}
+.thumb-ext {
+  position: absolute; bottom: 6px; right: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: rgba(255,107,71,0.85);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+.grid-info {
+  padding: 0.75rem 0.85rem 0.9rem;
+}
+.grid-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.35rem;
+}
+.grid-name mark {
+  background: rgba(232,255,71,0.2);
+  color: var(--accent);
+  border-radius: 2px;
+}
+.grid-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  display: flex; gap: 0.75rem;
+}
+
+/* ── 리스트 뷰 ── */
+.video-list { display: grid; gap: 2px; }
+.list-item {
+  display: grid;
+  grid-template-columns: 100px 1fr auto auto;
+  align-items: center;
+  gap: 1rem;
+  background: var(--card);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: default;
+  transition: border-color 0.15s, background 0.15s;
+  animation: slideIn 0.25s ease both;
+}
+.list-item:hover {
+  border-color: var(--border);
+  background: var(--card-hover);
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.list-thumb {
+  width: 100px;
+  aspect-ratio: 16/9;
+  background: #0d0d14;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.list-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.list-thumb .thumb-placeholder {
+  font-size: 1.2rem;
+}
+.list-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.5rem 0 0;
+}
+.list-name mark {
+  background: rgba(232,255,71,0.2);
+  color: var(--accent);
+  border-radius: 2px;
+}
+.list-ext {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(255,107,71,0.15);
+  color: var(--accent2);
+  border: 1px solid rgba(255,107,71,0.2);
+  white-space: nowrap;
+}
+.list-size {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+  padding-right: 1rem;
+}
+
+/* ── 검색 없음 ── */
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  display: none;
+}
+
+/* ── 푸터 ── */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>MY <span>VIDEO</span> LIBRARY</h1>
+    <div class="meta">
+      생성: <strong>2026-05-28 10:58</strong><br>
+      경로: <strong>C:/Users/이상재/Videos</strong><br>
+      총 <strong>9개</strong>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="search" id="searchInput" placeholder="파일명 검색..." autocomplete="off">
+  </div>
+  <select id="folderFilter">
+    <option value="">전체 폴더</option>
+    <option value="travel">travel</option><option value="family">family</option><option value="(루트)">(루트)</option>
+  </select>
+  <select id="sortSelect">
+    <option value="name">이름순</option>
+    <option value="size">크기순</option>
+    <option value="date">날짜순</option>
+  </select>
+  <div class="view-toggle">
+    <button class="view-btn active" id="btnGrid" title="그리드 뷰" onclick="setView('grid')">
+      <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+        <rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/>
+        <rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/>
+      </svg>
+    </button>
+    <button class="view-btn" id="btnList" title="리스트 뷰" onclick="setView('list')">
+      <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+        <rect x="1" y="2" width="14" height="2" rx="1"/><rect x="1" y="7" width="14" height="2" rx="1"/>
+        <rect x="1" y="12" width="14" height="2" rx="1"/>
+      </svg>
+    </button>
+  </div>
+  <div class="count-badge">표시: <strong id="visibleCount">9</strong> / 9</div>
+</div>
+
+<main>
+  <div id="videoContainer"></div>
+  <div class="empty" id="emptyMsg">검색 결과가 없습니다.</div>
+</main>
+
+<footer>
+  generated 2026-05-28 10:58 · 2026
+</footer>
+
+<script>
+const ALL_VIDEOS = [{"name": "2024 여름 가족여행 - 제주도", "filename": "2024 여름 가족여행 - 제주도.mp4", "ext": "MP4", "path": "travel/2024 여름 가족여행 - 제주도.mp4", "folder": "travel", "size": "2847.3 MB", "modified": "2024-08-15", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "제주도 올레길 걷기", "filename": "제주도 올레길 걷기.mp4", "ext": "MP4", "path": "travel/제주도 올레길 걷기.mp4", "folder": "travel", "size": "1203.5 MB", "modified": "2024-08-16", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "도쿄 여행 브이로그", "filename": "도쿄 여행 브이로그.mkv", "ext": "MKV", "path": "travel/도쿄 여행 브이로그.mkv", "folder": "travel", "size": "4102.8 MB", "modified": "2024-03-22", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "생일파티 2024", "filename": "생일파티 2024.mp4", "ext": "MP4", "path": "family/생일파티 2024.mp4", "folder": "family", "size": "567.2 MB", "modified": "2024-05-10", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "결혼기념일 저녁식사", "filename": "결혼기념일 저녁식사.mov", "ext": "MOV", "path": "family/결혼기념일 저녁식사.mov", "folder": "family", "size": "923.1 MB", "modified": "2024-07-03", "thumb": ""}, {"name": "졸업식", "filename": "졸업식.mp4", "ext": "MP4", "path": "family/졸업식.mp4", "folder": "family", "size": "1456.7 MB", "modified": "2024-02-28", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "Interstellar.2014.4K", "filename": "Interstellar.2014.4K.mkv", "ext": "MKV", "path": "Interstellar.2014.4K.mkv", "folder": "", "size": "28450.0 MB", "modified": "2023-11-01", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "Oppenheimer.2023", "filename": "Oppenheimer.2023.mp4", "ext": "MP4", "path": "Oppenheimer.2023.mp4", "folder": "", "size": "15320.4 MB", "modified": "2023-12-05", "thumb": ""}, {"name": "Dune.Part.Two.2024", "filename": "Dune.Part.Two.2024.mkv", "ext": "MKV", "path": "Dune.Part.Two.2024.mkv", "folder": "", "size": "22100.9 MB", "modified": "2024-06-18", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}];
+let currentView = 'grid';
+
+const searchInput  = document.getElementById('searchInput');
+const folderFilter = document.getElementById('folderFilter');
+const sortSelect   = document.getElementById('sortSelect');
+const container    = document.getElementById('videoContainer');
+const emptyMsg     = document.getElementById('emptyMsg');
+const visibleCount = document.getElementById('visibleCount');
+
+function setView(v) {
+  currentView = v;
+  document.getElementById('btnGrid').classList.toggle('active', v === 'grid');
+  document.getElementById('btnList').classList.toggle('active', v === 'list');
+  render();
+}
+
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function hl(text, q) {
+  if (!q) return esc(text);
+  const i = text.toLowerCase().indexOf(q.toLowerCase());
+  if (i === -1) return esc(text);
+  return esc(text.slice(0,i)) + '<mark>' + esc(text.slice(i, i+q.length)) + '</mark>' + esc(text.slice(i+q.length));
+}
+function thumbHtml(v) {
+  if (v.thumb) return `<img src="${v.thumb}" alt="${esc(v.name)}" loading="lazy">`;
+  return `<div class="thumb-placeholder">▶</div>`;
+}
+
+function render() {
+  const q      = searchInput.value.trim();
+  const folder = folderFilter.value;
+  const sort   = sortSelect.value;
+
+  let filtered = ALL_VIDEOS.filter(v => {
+    const mq = !q || v.name.toLowerCase().includes(q.toLowerCase());
+    const mf = !folder || (v.folder || '(루트)') === folder;
+    return mq && mf;
+  });
+
+  if (sort === 'name') filtered.sort((a,b) => a.name.localeCompare(b.name));
+  else if (sort === 'size') filtered.sort((a,b) => parseFloat(b.size) - parseFloat(a.size));
+  else if (sort === 'date') filtered.sort((a,b) => b.modified.localeCompare(a.modified));
+
+  visibleCount.textContent = filtered.length;
+  emptyMsg.style.display = filtered.length === 0 ? 'block' : 'none';
+
+  const groups = {};
+  filtered.forEach(v => { (groups[v.folder || '(루트)'] ??= []).push(v); });
+
+  container.innerHTML = Object.entries(groups).map(([folder, vids]) => {
+    const items = currentView === 'grid'
+      ? `<div class="video-grid">${vids.map((v,i) => `
+          <div class="grid-item" style="animation-delay:${i*0.02}s">
+            <div class="thumb-wrap">
+              ${thumbHtml(v)}
+              <span class="thumb-ext">${esc(v.ext)}</span>
+            </div>
+            <div class="grid-info">
+              <div class="grid-name" title="${esc(v.filename)}">${hl(v.name, q)}</div>
+              <div class="grid-meta">
+                <span>${esc(v.size)}</span>
+                <span>${esc(v.modified)}</span>
+              </div>
+            </div>
+          </div>`).join('')}</div>`
+      : `<div class="video-list">${vids.map((v,i) => `
+          <div class="list-item" style="animation-delay:${i*0.015}s">
+            <div class="list-thumb">${thumbHtml(v)}</div>
+            <div class="list-name" title="${esc(v.filename)}">${hl(v.name, q)}</div>
+            <span class="list-ext">${esc(v.ext)}</span>
+            <span class="list-size">${esc(v.size)}</span>
+          </div>`).join('')}</div>`;
+
+    return `<div class="folder-section">
+      <div class="folder-label">${esc(folder)}</div>
+      ${items}
+    </div>`;
+  }).join('');
+}
+
+searchInput.addEventListener('input', render);
+folderFilter.addEventListener('change', render);
+sortSelect.addEventListener('change', render);
+render();
+</script>
+</body>
+</html>
