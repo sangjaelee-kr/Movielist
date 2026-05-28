@@ -16,8 +16,6 @@
   --text: #e8e8f0;
   --muted: #5a5a72;
   --card: #13131c;
-  --card-hover: #16161f;
-  --radius: 8px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -25,310 +23,124 @@ body {
   color: var(--text);
   font-family: 'Syne', sans-serif;
   min-height: 100vh;
-  overflow-x: hidden;
 }
-
-/* ── 헤더 ── */
 header {
   padding: 3rem 2rem 2rem;
   border-bottom: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
 }
 header::before {
   content: '';
-  position: absolute;
-  top: -80px; left: -80px;
-  width: 400px; height: 400px;
+  position: absolute; top: -60px; left: -60px;
+  width: 300px; height: 300px;
   background: radial-gradient(circle, rgba(232,255,71,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 .header-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: flex-end;
+  justify-content: space-between; gap: 1rem; flex-wrap: wrap;
 }
 h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1;
 }
 h1 span { color: var(--accent); }
 .meta {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.72rem;
-  color: var(--muted);
-  text-align: right;
-  line-height: 2;
+  font-family: 'DM Mono', monospace; font-size: 0.72rem;
+  color: var(--muted); text-align: right; line-height: 2;
 }
 .meta strong { color: var(--accent); }
-
-/* ── 툴바 ── */
 .toolbar {
-  max-width: 1280px;
-  margin: 1.5rem auto 0;
+  max-width: 1200px; margin: 1.5rem auto 0;
   padding: 0 2rem 1.5rem;
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-  flex-wrap: wrap;
+  display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;
   border-bottom: 1px solid var(--border);
 }
-.search-wrap {
-  flex: 1; min-width: 200px;
-  position: relative;
-}
+.search-wrap { flex: 1; min-width: 200px; position: relative; }
 .search-wrap svg {
   position: absolute; left: 12px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted); pointer-events: none;
+  transform: translateY(-50%); color: var(--muted); pointer-events: none;
 }
 input[type=search] {
-  width: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.85rem;
+  width: 100%; background: var(--surface);
+  border: 1px solid var(--border); color: var(--text);
+  font-family: 'DM Mono', monospace; font-size: 0.85rem;
   padding: 0.6rem 1rem 0.6rem 2.4rem;
-  border-radius: 6px;
-  outline: none;
-  transition: border-color 0.2s;
+  border-radius: 6px; outline: none; transition: border-color 0.2s;
 }
 input[type=search]:focus { border-color: var(--accent); }
 select {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.8rem;
-  padding: 0.6rem 0.9rem;
-  border-radius: 6px;
-  outline: none; cursor: pointer;
-  transition: border-color 0.2s;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); font-family: 'DM Mono', monospace;
+  font-size: 0.8rem; padding: 0.6rem 0.9rem;
+  border-radius: 6px; outline: none; cursor: pointer;
 }
 select:focus { border-color: var(--accent); }
-
-/* 뷰 토글 */
-.view-toggle { display: flex; gap: 4px; }
-.view-btn {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--muted);
-  width: 34px; height: 34px;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s;
-}
-.view-btn.active, .view-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
 .count-badge {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.72rem;
-  color: var(--muted);
-  white-space: nowrap;
-  margin-left: auto;
+  font-family: 'DM Mono', monospace; font-size: 0.72rem;
+  color: var(--muted); white-space: nowrap; margin-left: auto;
 }
 .count-badge strong { color: var(--accent); }
-
-/* ── 메인 ── */
 main {
-  max-width: 1280px;
-  margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
   padding: 2rem 2rem 4rem;
 }
-
-/* ── 폴더 섹션 ── */
-.folder-section { margin-bottom: 3rem; }
+.folder-section { margin-bottom: 2.5rem; }
 .folder-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border);
+  font-family: 'DM Mono', monospace; font-size: 0.68rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 0.5rem;
 }
-.folder-label::before {
-  content: '▶'; color: var(--accent); font-size: 0.55rem;
-}
-
-/* ── 그리드 뷰 ── */
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1px;
-}
-.grid-item {
-  background: var(--card);
-  border-radius: var(--radius);
-  overflow: hidden;
-  cursor: default;
-  transition: transform 0.2s, box-shadow 0.2s;
-  animation: fadeUp 0.35s ease both;
-}
-.grid-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
-  z-index: 1;
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.thumb-wrap {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: #0d0d14;
-  position: relative;
-  overflow: hidden;
-}
-.thumb-wrap img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-.grid-item:hover .thumb-wrap img {
-  transform: scale(1.05);
-}
-.thumb-placeholder {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--border);
-  font-size: 2rem;
-}
-.thumb-ext {
-  position: absolute; bottom: 6px; right: 6px;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  padding: 2px 5px;
-  border-radius: 3px;
-  background: rgba(255,107,71,0.85);
-  color: #fff;
-  backdrop-filter: blur(4px);
-}
-.grid-info {
-  padding: 0.75rem 0.85rem 0.9rem;
-}
-.grid-name {
-  font-size: 0.82rem;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 0.35rem;
-}
-.grid-name mark {
-  background: rgba(232,255,71,0.2);
-  color: var(--accent);
-  border-radius: 2px;
-}
-.grid-meta {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--muted);
-  display: flex; gap: 0.75rem;
-}
-
-/* ── 리스트 뷰 ── */
+.folder-label::before { content: '▶'; color: var(--accent); font-size: 0.55rem; }
 .video-list { display: grid; gap: 2px; }
-.list-item {
+.video-item {
   display: grid;
-  grid-template-columns: 100px 1fr auto auto;
-  align-items: center;
-  gap: 1rem;
+  grid-template-columns: 3ch 1fr auto auto;
+  align-items: center; gap: 1rem;
+  padding: 0.85rem 1rem;
   background: var(--card);
-  border: 1px solid transparent;
-  border-radius: 6px;
-  overflow: hidden;
-  cursor: default;
+  border: 1px solid transparent; border-radius: 4px;
   transition: border-color 0.15s, background 0.15s;
   animation: slideIn 0.25s ease both;
 }
-.list-item:hover {
-  border-color: var(--border);
-  background: var(--card-hover);
-}
+.video-item:hover { border-color: var(--border); background: #16161f; }
 @keyframes slideIn {
-  from { opacity: 0; transform: translateX(-4px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.list-thumb {
-  width: 100px;
-  aspect-ratio: 16/9;
-  background: #0d0d14;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
+.video-idx {
+  font-family: 'DM Mono', monospace; font-size: 0.68rem;
+  color: var(--muted); text-align: right;
 }
-.list-thumb img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
+.video-name {
+  font-size: 0.9rem; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.list-thumb .thumb-placeholder {
-  font-size: 1.2rem;
+.video-name mark {
+  background: rgba(232,255,71,0.2); color: var(--accent); border-radius: 2px;
 }
-.list-name {
-  font-size: 0.88rem;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 0.5rem 0 0;
+.video-ext {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  padding: 2px 6px; border-radius: 3px;
+  background: rgba(255,107,71,0.15); color: var(--accent2);
+  border: 1px solid rgba(255,107,71,0.2); white-space: nowrap;
 }
-.list-name mark {
-  background: rgba(232,255,71,0.2);
-  color: var(--accent);
-  border-radius: 2px;
+.video-size {
+  font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  color: var(--muted); white-space: nowrap;
 }
-.list-ext {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.62rem;
-  padding: 2px 6px;
-  border-radius: 3px;
-  background: rgba(255,107,71,0.15);
-  color: var(--accent2);
-  border: 1px solid rgba(255,107,71,0.2);
-  white-space: nowrap;
-}
-.list-size {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.7rem;
-  color: var(--muted);
-  white-space: nowrap;
-  padding-right: 1rem;
-}
-
-/* ── 검색 없음 ── */
 .empty {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: var(--muted);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.85rem;
-  display: none;
+  text-align: center; padding: 4rem 2rem;
+  color: var(--muted); font-family: 'DM Mono', monospace;
+  font-size: 0.85rem; display: none;
 }
-
-/* ── 푸터 ── */
 footer {
-  text-align: center;
-  padding: 2rem;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.68rem;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
+  text-align: center; padding: 2rem;
+  font-family: 'DM Mono', monospace; font-size: 0.68rem;
+  color: var(--muted); border-top: 1px solid var(--border);
 }
 </style>
 </head>
@@ -338,9 +150,9 @@ footer {
   <div class="header-inner">
     <h1>MY <span>VIDEO</span> LIBRARY</h1>
     <div class="meta">
-      생성: <strong>2026-05-28 10:58</strong><br>
-      경로: <strong>C:/Users/이상재/Videos</strong><br>
-      총 <strong>9개</strong>
+      생성: <strong>2026-05-28 20:19</strong><br>
+      경로: <strong>E:\Torrent\Down</strong><br>
+      총 <strong>113개</strong>
     </div>
   </div>
 </header>
@@ -354,28 +166,14 @@ footer {
   </div>
   <select id="folderFilter">
     <option value="">전체 폴더</option>
-    <option value="travel">travel</option><option value="family">family</option><option value="(루트)">(루트)</option>
+    <option value="033122-001-carib-1080p">033122-001-carib-1080p</option><option value="(루트)">(루트)</option><option value="812MMC-020">812MMC-020</option><option value="812MMC-026">812MMC-026</option><option value="892OERO-001">892OERO-001</option><option value="AIAV-046">AIAV-046</option><option value="AILB-010">AILB-010</option><option value="BONY-191">BONY-191</option><option value="CJOD-514">CJOD-514</option><option value="EBWH-332">EBWH-332</option><option value="FC2-PPV-1517203">FC2-PPV-1517203</option><option value="FC2-PPV-1520116">FC2-PPV-1520116</option><option value="FC2-PPV-1563955">FC2-PPV-1563955</option><option value="FC2-PPV-1601853">FC2-PPV-1601853</option><option value="FC2-PPV-1611540">FC2-PPV-1611540</option><option value="FC2-PPV-1617896">FC2-PPV-1617896</option><option value="FC2-PPV-1679109">FC2-PPV-1679109</option><option value="FC2-PPV-1718569">FC2-PPV-1718569</option><option value="FC2-PPV-1872410">FC2-PPV-1872410</option><option value="FC2-PPV-2407412">FC2-PPV-2407412</option><option value="FC2-PPV-2493974">FC2-PPV-2493974</option><option value="FC2-PPV-2561535">FC2-PPV-2561535</option><option value="FC2-PPV-3539783">FC2-PPV-3539783</option><option value="FC2-PPV-3554088">FC2-PPV-3554088</option><option value="FC2-PPV-4396497">FC2-PPV-4396497</option><option value="FC2-PPV-4541879">FC2-PPV-4541879</option><option value="FC2-PPV-4552052">FC2-PPV-4552052</option><option value="FC2-PPV-4557706">FC2-PPV-4557706</option><option value="FC2PPV-1708499">FC2PPV-1708499</option><option value="FC2PPV-1807627">FC2PPV-1807627</option><option value="FC2PPV-1833619">FC2PPV-1833619</option><option value="FC2PPV-3418275">FC2PPV-3418275</option><option value="FPRE-182">FPRE-182</option><option value="Heyzo-2416-HD">Heyzo-2416-HD</option><option value="heyzo-2605">heyzo-2605</option><option value="HEYZO-3176">HEYZO-3176</option><option value="HEYZO-3428">HEYZO-3428</option><option value="HMN-877">HMN-877</option><option value="HMNF-076">HMNF-076</option><option value="HUNTC-610">HUNTC-610</option><option value="IPZZ-801">IPZZ-801</option><option value="MEYD-875">MEYD-875</option><option value="MFCW-072">MFCW-072</option><option value="MIDA-520">MIDA-520</option><option value="MKMP-660">MKMP-660</option><option value="MMUS-078">MMUS-078</option><option value="MSZ-33">MSZ-33</option><option value="MUCH-138">MUCH-138</option><option value="NIMA-024">NIMA-024</option><option value="OLM-312E">OLM-312E</option><option value="SNOS-217">SNOS-217</option><option value="SONE-798">SONE-798</option><option value="SONE-828">SONE-828</option><option value="SONE-866">SONE-866</option><option value="SONE-970">SONE-970</option><option value="SONE-975">SONE-975</option><option value="SPSF-01">SPSF-01</option><option value="SPSF-05">SPSF-05</option><option value="ssis-816">ssis-816</option><option value="SSIS-838">SSIS-838</option><option value="STARS-825">STARS-825</option><option value="ure-088">ure-088</option><option value="VOV-108">VOV-108</option><option value="강남로 마사지샵">강남로 마사지샵</option><option value="떡치는 교도소 여자 교도관과 비밀 섹스">떡치는 교도소 여자 교도관과 비밀 섹스</option>
   </select>
   <select id="sortSelect">
     <option value="name">이름순</option>
     <option value="size">크기순</option>
     <option value="date">날짜순</option>
   </select>
-  <div class="view-toggle">
-    <button class="view-btn active" id="btnGrid" title="그리드 뷰" onclick="setView('grid')">
-      <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-        <rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/>
-        <rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/>
-      </svg>
-    </button>
-    <button class="view-btn" id="btnList" title="리스트 뷰" onclick="setView('list')">
-      <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-        <rect x="1" y="2" width="14" height="2" rx="1"/><rect x="1" y="7" width="14" height="2" rx="1"/>
-        <rect x="1" y="12" width="14" height="2" rx="1"/>
-      </svg>
-    </button>
-  </div>
-  <div class="count-badge">표시: <strong id="visibleCount">9</strong> / 9</div>
+  <div class="count-badge">표시: <strong id="visibleCount">113</strong> / 113</div>
 </div>
 
 <main>
@@ -383,13 +181,10 @@ footer {
   <div class="empty" id="emptyMsg">검색 결과가 없습니다.</div>
 </main>
 
-<footer>
-  generated 2026-05-28 10:58 · 2026
-</footer>
+<footer>generated 2026-05-28 20:19</footer>
 
 <script>
-const ALL_VIDEOS = [{"name": "2024 여름 가족여행 - 제주도", "filename": "2024 여름 가족여행 - 제주도.mp4", "ext": "MP4", "path": "travel/2024 여름 가족여행 - 제주도.mp4", "folder": "travel", "size": "2847.3 MB", "modified": "2024-08-15", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "제주도 올레길 걷기", "filename": "제주도 올레길 걷기.mp4", "ext": "MP4", "path": "travel/제주도 올레길 걷기.mp4", "folder": "travel", "size": "1203.5 MB", "modified": "2024-08-16", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "도쿄 여행 브이로그", "filename": "도쿄 여행 브이로그.mkv", "ext": "MKV", "path": "travel/도쿄 여행 브이로그.mkv", "folder": "travel", "size": "4102.8 MB", "modified": "2024-03-22", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "생일파티 2024", "filename": "생일파티 2024.mp4", "ext": "MP4", "path": "family/생일파티 2024.mp4", "folder": "family", "size": "567.2 MB", "modified": "2024-05-10", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "결혼기념일 저녁식사", "filename": "결혼기념일 저녁식사.mov", "ext": "MOV", "path": "family/결혼기념일 저녁식사.mov", "folder": "family", "size": "923.1 MB", "modified": "2024-07-03", "thumb": ""}, {"name": "졸업식", "filename": "졸업식.mp4", "ext": "MP4", "path": "family/졸업식.mp4", "folder": "family", "size": "1456.7 MB", "modified": "2024-02-28", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "Interstellar.2014.4K", "filename": "Interstellar.2014.4K.mkv", "ext": "MKV", "path": "Interstellar.2014.4K.mkv", "folder": "", "size": "28450.0 MB", "modified": "2023-11-01", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}, {"name": "Oppenheimer.2023", "filename": "Oppenheimer.2023.mp4", "ext": "MP4", "path": "Oppenheimer.2023.mp4", "folder": "", "size": "15320.4 MB", "modified": "2023-12-05", "thumb": ""}, {"name": "Dune.Part.Two.2024", "filename": "Dune.Part.Two.2024.mkv", "ext": "MKV", "path": "Dune.Part.Two.2024.mkv", "folder": "", "size": "22100.9 MB", "modified": "2024-06-18", "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzBkMGQxOCIvPjxwb2x5Z29uIHBvaW50cz0iMTMwLDY1IDEzMCwxMTUgMTgwLDkwIiBmaWxsPSIjMmEyYTNhIi8+PC9zdmc+"}];
-let currentView = 'grid';
+const ALL_VIDEOS = [{"name": "033122-001-carib-1080p", "filename": "033122-001-carib-1080p.mp4", "ext": "MP4", "path": "033122-001-carib-1080p/033122-001-carib-1080p.mp4", "folder": "033122-001-carib-1080p", "size": "604.6 MB", "modified": "2022-04-01"}, {"name": "uur76", "filename": "uur76.mp4", "ext": "MP4", "path": "033122-001-carib-1080p/uur76.mp4", "folder": "033122-001-carib-1080p", "size": "16.9 MB", "modified": "2022-04-01"}, {"name": "社 區 最 新 情 報", "filename": "社 區 最 新 情 報.mp4", "ext": "MP4", "path": "033122-001-carib-1080p/社 區 最 新 情 報.mp4", "folder": "033122-001-carib-1080p", "size": "14.4 MB", "modified": "2022-04-01"}, {"name": "259LUXU-1357", "filename": "259LUXU-1357.mp4", "ext": "MP4", "path": "259LUXU-1357.mp4", "folder": "", "size": "2363.9 MB", "modified": "2020-12-17"}, {"name": "345SIMM-580", "filename": "345SIMM-580.mp4", "ext": "MP4", "path": "345SIMM-580.mp4", "folder": "", "size": "1614.7 MB", "modified": "2020-12-25"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "812MMC-020/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "812MMC-020", "size": "1.9 MB", "modified": "2025-11-27"}, {"name": "hhd800.com@812MMC-020", "filename": "hhd800.com@812MMC-020.mp4", "ext": "MP4", "path": "812MMC-020/hhd800.com@812MMC-020.mp4", "folder": "812MMC-020", "size": "3451.5 MB", "modified": "2025-11-27"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "812MMC-026/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "812MMC-026", "size": "1.9 MB", "modified": "2026-05-21"}, {"name": "hhd800.com@812MMC-026", "filename": "hhd800.com@812MMC-026.mp4", "ext": "MP4", "path": "812MMC-026/hhd800.com@812MMC-026.mp4", "folder": "812MMC-026", "size": "3626.1 MB", "modified": "2026-05-21"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "892OERO-001/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "892OERO-001", "size": "1.9 MB", "modified": "2026-05-21"}, {"name": "hhd800.com@892OERO-001", "filename": "hhd800.com@892OERO-001.mp4", "ext": "MP4", "path": "892OERO-001/hhd800.com@892OERO-001.mp4", "folder": "892OERO-001", "size": "2431.0 MB", "modified": "2026-05-21"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "AIAV-046/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "AIAV-046", "size": "1.9 MB", "modified": "2026-04-22"}, {"name": "hhd800.com@AIAV-046", "filename": "hhd800.com@AIAV-046.mp4", "ext": "MP4", "path": "AIAV-046/hhd800.com@AIAV-046.mp4", "folder": "AIAV-046", "size": "2942.0 MB", "modified": "2026-04-22"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "AILB-010/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "AILB-010", "size": "1.9 MB", "modified": "2026-05-21"}, {"name": "hhd800.com@AILB-010", "filename": "hhd800.com@AILB-010.mp4", "ext": "MP4", "path": "AILB-010/hhd800.com@AILB-010.mp4", "folder": "AILB-010", "size": "2362.8 MB", "modified": "2026-05-22"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "BONY-191/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "BONY-191", "size": "1.9 MB", "modified": "2026-05-22"}, {"name": "hhd800.com@BONY-191", "filename": "hhd800.com@BONY-191.mp4", "ext": "MP4", "path": "BONY-191/hhd800.com@BONY-191.mp4", "folder": "BONY-191", "size": "5521.6 MB", "modified": "2026-05-23"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "CJOD-514/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "CJOD-514", "size": "1.9 MB", "modified": "2026-05-22"}, {"name": "hhd800.com@CJOD-514", "filename": "hhd800.com@CJOD-514.mp4", "ext": "MP4", "path": "CJOD-514/hhd800.com@CJOD-514.mp4", "folder": "CJOD-514", "size": "8679.8 MB", "modified": "2026-05-24"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "EBWH-332/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "EBWH-332", "size": "1.9 MB", "modified": "2026-05-16"}, {"name": "hhd800.com@EBWH-332", "filename": "hhd800.com@EBWH-332.mp4", "ext": "MP4", "path": "EBWH-332/hhd800.com@EBWH-332.mp4", "folder": "EBWH-332", "size": "4202.2 MB", "modified": "2026-05-17"}, {"name": "FC2-PPV-1517203", "filename": "FC2-PPV-1517203.mp4", "ext": "MP4", "path": "FC2-PPV-1517203/FC2-PPV-1517203.mp4", "folder": "FC2-PPV-1517203", "size": "3977.6 MB", "modified": "2020-11-29"}, {"name": "FC2-PPV-1520116", "filename": "FC2-PPV-1520116.mp4", "ext": "MP4", "path": "FC2-PPV-1520116/FC2-PPV-1520116.mp4", "folder": "FC2-PPV-1520116", "size": "1337.8 MB", "modified": "2020-12-05"}, {"name": "FC2-PPV-1563955", "filename": "FC2-PPV-1563955.mp4", "ext": "MP4", "path": "FC2-PPV-1563955/FC2-PPV-1563955.mp4", "folder": "FC2-PPV-1563955", "size": "723.5 MB", "modified": "2021-01-10"}, {"name": "FC2-PPV-1601853", "filename": "FC2-PPV-1601853.mp4", "ext": "MP4", "path": "FC2-PPV-1601853/FC2-PPV-1601853.mp4", "folder": "FC2-PPV-1601853", "size": "3854.8 MB", "modified": "2020-12-17"}, {"name": "FC2-PPV-1611540", "filename": "FC2-PPV-1611540.mp4", "ext": "MP4", "path": "FC2-PPV-1611540/FC2-PPV-1611540.mp4", "folder": "FC2-PPV-1611540", "size": "1480.8 MB", "modified": "2021-01-29"}, {"name": "FC2-PPV-1617896", "filename": "FC2-PPV-1617896.mp4", "ext": "MP4", "path": "FC2-PPV-1617896/FC2-PPV-1617896.mp4", "folder": "FC2-PPV-1617896", "size": "2232.7 MB", "modified": "2021-02-01"}, {"name": "FC2-PPV-1679109", "filename": "FC2-PPV-1679109.mp4", "ext": "MP4", "path": "FC2-PPV-1679109/FC2-PPV-1679109.mp4", "folder": "FC2-PPV-1679109", "size": "1434.2 MB", "modified": "2021-03-24"}, {"name": "FC2-PPV-1718569", "filename": "FC2-PPV-1718569.mp4", "ext": "MP4", "path": "FC2-PPV-1718569/FC2-PPV-1718569.mp4", "folder": "FC2-PPV-1718569", "size": "1265.2 MB", "modified": "2021-05-07"}, {"name": "hhd800.com@FC2-PPV-1872410", "filename": "hhd800.com@FC2-PPV-1872410.mp4", "ext": "MP4", "path": "FC2-PPV-1872410/hhd800.com@FC2-PPV-1872410.mp4", "folder": "FC2-PPV-1872410", "size": "1140.8 MB", "modified": "2021-08-26"}, {"name": "hhd800.com@FC2-PPV-2407412", "filename": "hhd800.com@FC2-PPV-2407412.mp4", "ext": "MP4", "path": "FC2-PPV-2407412/hhd800.com@FC2-PPV-2407412.mp4", "folder": "FC2-PPV-2407412", "size": "938.7 MB", "modified": "2021-11-26"}, {"name": "hhd800.com@FC2-PPV-2493974", "filename": "hhd800.com@FC2-PPV-2493974.mp4", "ext": "MP4", "path": "FC2-PPV-2493974/hhd800.com@FC2-PPV-2493974.mp4", "folder": "FC2-PPV-2493974", "size": "1230.6 MB", "modified": "2022-01-05"}, {"name": "hhd800.com@FC2-PPV-2561535", "filename": "hhd800.com@FC2-PPV-2561535.mp4", "ext": "MP4", "path": "FC2-PPV-2561535/hhd800.com@FC2-PPV-2561535.mp4", "folder": "FC2-PPV-2561535", "size": "1395.0 MB", "modified": "2022-01-13"}, {"name": "hhd800.com@FC2-PPV-3539783", "filename": "hhd800.com@FC2-PPV-3539783.mp4", "ext": "MP4", "path": "FC2-PPV-3539783/hhd800.com@FC2-PPV-3539783.mp4", "folder": "FC2-PPV-3539783", "size": "7099.4 MB", "modified": "2023-07-08"}, {"name": "hhd800.com@FC2-PPV-3554088", "filename": "hhd800.com@FC2-PPV-3554088.mp4", "ext": "MP4", "path": "FC2-PPV-3554088/hhd800.com@FC2-PPV-3554088.mp4", "folder": "FC2-PPV-3554088", "size": "3331.1 MB", "modified": "2023-07-10"}, {"name": "hhd800.com@FC2-PPV-4396497", "filename": "hhd800.com@FC2-PPV-4396497.mp4", "ext": "MP4", "path": "FC2-PPV-4396497/hhd800.com@FC2-PPV-4396497.mp4", "folder": "FC2-PPV-4396497", "size": "871.7 MB", "modified": "2024-04-21"}, {"name": "hhd800.com@FC2-PPV-4541879", "filename": "hhd800.com@FC2-PPV-4541879.mp4", "ext": "MP4", "path": "FC2-PPV-4541879/hhd800.com@FC2-PPV-4541879.mp4", "folder": "FC2-PPV-4541879", "size": "1692.8 MB", "modified": "2024-09-27"}, {"name": "hhd800.com@FC2-PPV-4552052", "filename": "hhd800.com@FC2-PPV-4552052.mp4", "ext": "MP4", "path": "FC2-PPV-4552052/hhd800.com@FC2-PPV-4552052.mp4", "folder": "FC2-PPV-4552052", "size": "1715.8 MB", "modified": "2024-10-14"}, {"name": "hhd800.com@FC2-PPV-4557706", "filename": "hhd800.com@FC2-PPV-4557706.mp4", "ext": "MP4", "path": "FC2-PPV-4557706/hhd800.com@FC2-PPV-4557706.mp4", "folder": "FC2-PPV-4557706", "size": "734.4 MB", "modified": "2024-10-22"}, {"name": "FC2PPV-1708499-1", "filename": "FC2PPV-1708499-1.mp4", "ext": "MP4", "path": "FC2PPV-1708499/FC2PPV-1708499-1.mp4", "folder": "FC2PPV-1708499", "size": "4612.6 MB", "modified": "2021-03-06"}, {"name": "FC2PPV-1708499-2", "filename": "FC2PPV-1708499-2.mp4", "ext": "MP4", "path": "FC2PPV-1708499/FC2PPV-1708499-2.mp4", "folder": "FC2PPV-1708499", "size": "1889.6 MB", "modified": "2021-03-06"}, {"name": "有趣的小视频", "filename": "有趣的小视频.mp4", "ext": "MP4", "path": "FC2PPV-1708499/有趣的小视频.mp4", "folder": "FC2PPV-1708499", "size": "61.5 MB", "modified": "2021-03-06"}, {"name": "FC2PPV-1807627-1", "filename": "FC2PPV-1807627-1.mp4", "ext": "MP4", "path": "FC2PPV-1807627/FC2PPV-1807627-1.mp4", "folder": "FC2PPV-1807627", "size": "1752.8 MB", "modified": "2021-05-21"}, {"name": "FC2PPV-1807627-2", "filename": "FC2PPV-1807627-2.mp4", "ext": "MP4", "path": "FC2PPV-1807627/FC2PPV-1807627-2.mp4", "folder": "FC2PPV-1807627", "size": "1914.3 MB", "modified": "2021-05-21"}, {"name": "有趣的台湾妹妹直播", "filename": "有趣的台湾妹妹直播.mp4", "ext": "MP4", "path": "FC2PPV-1807627/有趣的台湾妹妹直播.mp4", "folder": "FC2PPV-1807627", "size": "15.1 MB", "modified": "2021-05-21"}, {"name": "社区最新情报", "filename": "社区最新情报.mp4", "ext": "MP4", "path": "FC2PPV-1807627/社区最新情报.mp4", "folder": "FC2PPV-1807627", "size": "19.2 MB", "modified": "2021-05-21"}, {"name": "FC2PPV-1833619", "filename": "FC2PPV-1833619.mp4", "ext": "MP4", "path": "FC2PPV-1833619/FC2PPV-1833619.mp4", "folder": "FC2PPV-1833619", "size": "586.3 MB", "modified": "2021-05-26"}, {"name": "有趣的台湾妹妹直播", "filename": "有趣的台湾妹妹直播.mp4", "ext": "MP4", "path": "FC2PPV-1833619/有趣的台湾妹妹直播.mp4", "folder": "FC2PPV-1833619", "size": "15.1 MB", "modified": "2021-05-26"}, {"name": "社区最新情报", "filename": "社区最新情报.mp4", "ext": "MP4", "path": "FC2PPV-1833619/社区最新情报.mp4", "folder": "FC2PPV-1833619", "size": "19.2 MB", "modified": "2021-05-26"}, {"name": "FC2PPV-3418275-1", "filename": "FC2PPV-3418275-1.mp4", "ext": "MP4", "path": "FC2PPV-3418275/FC2PPV-3418275-1.mp4", "folder": "FC2PPV-3418275", "size": "2149.1 MB", "modified": "2023-06-06"}, {"name": "FC2PPV-3418275-2", "filename": "FC2PPV-3418275-2.mp4", "ext": "MP4", "path": "FC2PPV-3418275/FC2PPV-3418275-2.mp4", "folder": "FC2PPV-3418275", "size": "853.7 MB", "modified": "2023-06-06"}, {"name": "x u u 6 2 . c o m", "filename": "x u u 6 2 . c o m.mp4", "ext": "MP4", "path": "FC2PPV-3418275/x u u 6 2 . c o m.mp4", "folder": "FC2PPV-3418275", "size": "12.1 MB", "modified": "2023-06-06"}, {"name": "社 區 最 新 情 報", "filename": "社 區 最 新 情 報.mp4", "ext": "MP4", "path": "FC2PPV-3418275/社 區 最 新 情 報.mp4", "folder": "FC2PPV-3418275", "size": "14.4 MB", "modified": "2023-06-06"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "FPRE-182/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "FPRE-182", "size": "1.9 MB", "modified": "2025-06-05"}, {"name": "hhd800.com@FPRE-182", "filename": "hhd800.com@FPRE-182.mp4", "ext": "MP4", "path": "FPRE-182/hhd800.com@FPRE-182.mp4", "folder": "FPRE-182", "size": "6554.3 MB", "modified": "2025-06-05"}, {"name": "heyzo_hd_2416_full", "filename": "heyzo_hd_2416_full.mp4", "ext": "MP4", "path": "Heyzo-2416-HD/heyzo_hd_2416_full.mp4", "folder": "Heyzo-2416-HD", "size": "2079.1 MB", "modified": "2020-12-14"}, {"name": "heyzo-2605", "filename": "heyzo-2605.mp4", "ext": "MP4", "path": "heyzo-2605/heyzo-2605.mp4", "folder": "heyzo-2605", "size": "2172.9 MB", "modified": "2021-09-08"}, {"name": "新 片 首 發  每 天 更 新  同 步 日 韓", "filename": "新 片 首 發  每 天 更 新  同 步 日 韓.mp4", "ext": "MP4", "path": "heyzo-2605/新 片 首 發  每 天 更 新  同 步 日 韓.mp4", "folder": "heyzo-2605", "size": "13.8 MB", "modified": "2021-09-08"}, {"name": "有 趣 的 臺 灣 妹 妹 直 播 ", "filename": "有 趣 的 臺 灣 妹 妹 直 播 .mp4", "ext": "MP4", "path": "heyzo-2605/有 趣 的 臺 灣 妹 妹 直 播 .mp4", "folder": "heyzo-2605", "size": "15.1 MB", "modified": "2021-09-08"}, {"name": "hhd800.com@HEYZO-3176", "filename": "hhd800.com@HEYZO-3176.mp4", "ext": "MP4", "path": "HEYZO-3176/hhd800.com@HEYZO-3176.mp4", "folder": "HEYZO-3176", "size": "569.7 MB", "modified": "2023-11-11"}, {"name": "hhd800.com@HEYZO-3428", "filename": "hhd800.com@HEYZO-3428.mp4", "ext": "MP4", "path": "HEYZO-3428/hhd800.com@HEYZO-3428.mp4", "folder": "HEYZO-3428", "size": "426.1 MB", "modified": "2024-10-11"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "HMN-877/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "HMN-877", "size": "1.9 MB", "modified": "2026-05-22"}, {"name": "hhd800.com@HMN-877", "filename": "hhd800.com@HMN-877.mp4", "ext": "MP4", "path": "HMN-877/hhd800.com@HMN-877.mp4", "folder": "HMN-877", "size": "5465.3 MB", "modified": "2026-05-22"}, {"name": "hhd800.com@HMNF-076", "filename": "hhd800.com@HMNF-076.mp4", "ext": "MP4", "path": "HMNF-076/hhd800.com@HMNF-076.mp4", "folder": "HMNF-076", "size": "5095.4 MB", "modified": "2022-01-01"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "HUNTC-610/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "HUNTC-610", "size": "1.9 MB", "modified": "2026-05-22"}, {"name": "hhd800.com@HUNTC-610", "filename": "hhd800.com@HUNTC-610.mp4", "ext": "MP4", "path": "HUNTC-610/hhd800.com@HUNTC-610.mp4", "folder": "HUNTC-610", "size": "8471.9 MB", "modified": "2026-05-22"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "IPZZ-801/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "IPZZ-801", "size": "1.9 MB", "modified": "2026-03-06"}, {"name": "hhd800.com@IPZZ-801", "filename": "hhd800.com@IPZZ-801.mp4", "ext": "MP4", "path": "IPZZ-801/hhd800.com@IPZZ-801.mp4", "folder": "IPZZ-801", "size": "5211.5 MB", "modified": "2026-03-06"}, {"name": "hhd800.com@MEYD-875", "filename": "hhd800.com@MEYD-875.mp4", "ext": "MP4", "path": "MEYD-875/hhd800.com@MEYD-875.mp4", "folder": "MEYD-875", "size": "5067.9 MB", "modified": "2024-01-13"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "MFCW-072/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "MFCW-072", "size": "1.9 MB", "modified": "2026-05-21"}, {"name": "hhd800.com@MFCW-072", "filename": "hhd800.com@MFCW-072.mp4", "ext": "MP4", "path": "MFCW-072/hhd800.com@MFCW-072.mp4", "folder": "MFCW-072", "size": "2970.9 MB", "modified": "2026-05-21"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "MIDA-520/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "MIDA-520", "size": "1.9 MB", "modified": "2026-02-13"}, {"name": "hhd800.com@MIDA-520", "filename": "hhd800.com@MIDA-520.mp4", "ext": "MP4", "path": "MIDA-520/hhd800.com@MIDA-520.mp4", "folder": "MIDA-520", "size": "5364.5 MB", "modified": "2026-02-13"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "MKMP-660/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "MKMP-660", "size": "1.9 MB", "modified": "2025-08-09"}, {"name": "hhd800.com@MKMP-660", "filename": "hhd800.com@MKMP-660.mp4", "ext": "MP4", "path": "MKMP-660/hhd800.com@MKMP-660.mp4", "folder": "MKMP-660", "size": "5582.2 MB", "modified": "2025-08-09"}, {"name": "hhd800.com@MMUS-078", "filename": "hhd800.com@MMUS-078.mp4", "ext": "MP4", "path": "MMUS-078/hhd800.com@MMUS-078.mp4", "folder": "MMUS-078", "size": "5788.1 MB", "modified": "2023-07-30"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "MSZ-33/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "MSZ-33", "size": "1.9 MB", "modified": "2026-05-21"}, {"name": "hhd800.com@MSZ-33", "filename": "hhd800.com@MSZ-33.mp4", "ext": "MP4", "path": "MSZ-33/hhd800.com@MSZ-33.mp4", "folder": "MSZ-33", "size": "3834.7 MB", "modified": "2026-05-22"}, {"name": "much-138-1", "filename": "much-138-1.mp4", "ext": "MP4", "path": "MUCH-138/much-138-1.mp4", "folder": "MUCH-138", "size": "10326.7 MB", "modified": "2021-10-14"}, {"name": "much-138-2", "filename": "much-138-2.mp4", "ext": "MP4", "path": "MUCH-138/much-138-2.mp4", "folder": "MUCH-138", "size": "10363.1 MB", "modified": "2021-10-14"}, {"name": "有 趣 的 臺 灣 妹 妹 直 播", "filename": "有 趣 的 臺 灣 妹 妹 直 播.mp4", "ext": "MP4", "path": "MUCH-138/有 趣 的 臺 灣 妹 妹 直 播.mp4", "folder": "MUCH-138", "size": "15.1 MB", "modified": "2021-10-14"}, {"name": "社 區 最 新 情 報", "filename": "社 區 最 新 情 報.mp4", "ext": "MP4", "path": "MUCH-138/社 區 最 新 情 報.mp4", "folder": "MUCH-138", "size": "14.4 MB", "modified": "2021-10-14"}, {"name": "hhd800.com@NIMA-024", "filename": "hhd800.com@NIMA-024.mp4", "ext": "MP4", "path": "NIMA-024/hhd800.com@NIMA-024.mp4", "folder": "NIMA-024", "size": "5061.2 MB", "modified": "2024-01-14"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "OLM-312E/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "OLM-312E", "size": "1.9 MB", "modified": "2026-04-28"}, {"name": "hhd800.com@OLM-312E", "filename": "hhd800.com@OLM-312E.mp4", "ext": "MP4", "path": "OLM-312E/hhd800.com@OLM-312E.mp4", "folder": "OLM-312E", "size": "5144.1 MB", "modified": "2026-04-28"}, {"name": "SMX-002", "filename": "SMX-002.mp4", "ext": "MP4", "path": "SMX-002.mp4", "folder": "", "size": "4239.0 MB", "modified": "2020-12-05"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "SNOS-217/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "SNOS-217", "size": "1.9 MB", "modified": "2026-05-22"}, {"name": "hhd800.com@SNOS-217", "filename": "hhd800.com@SNOS-217.mp4", "ext": "MP4", "path": "SNOS-217/hhd800.com@SNOS-217.mp4", "folder": "SNOS-217", "size": "5577.6 MB", "modified": "2026-05-22"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "SONE-798/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "SONE-798", "size": "1.9 MB", "modified": "2025-08-04"}, {"name": "hhd800.com@SONE-798", "filename": "hhd800.com@SONE-798.mp4", "ext": "MP4", "path": "SONE-798/hhd800.com@SONE-798.mp4", "folder": "SONE-798", "size": "6250.0 MB", "modified": "2025-08-04"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "SONE-828/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "SONE-828", "size": "1.9 MB", "modified": "2025-08-22"}, {"name": "hhd800.com@SONE-828", "filename": "hhd800.com@SONE-828.mp4", "ext": "MP4", "path": "SONE-828/hhd800.com@SONE-828.mp4", "folder": "SONE-828", "size": "8012.2 MB", "modified": "2025-08-23"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "SONE-866/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "SONE-866", "size": "1.9 MB", "modified": "2025-09-19"}, {"name": "hhd800.com@SONE-866", "filename": "hhd800.com@SONE-866.mp4", "ext": "MP4", "path": "SONE-866/hhd800.com@SONE-866.mp4", "folder": "SONE-866", "size": "9778.2 MB", "modified": "2025-09-20"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "SONE-970/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "SONE-970", "size": "1.9 MB", "modified": "2025-11-16"}, {"name": "hhd800.com@SONE-970", "filename": "hhd800.com@SONE-970.mp4", "ext": "MP4", "path": "SONE-970/hhd800.com@SONE-970.mp4", "folder": "SONE-970", "size": "5157.9 MB", "modified": "2025-11-16"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "SONE-975/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "SONE-975", "size": "1.9 MB", "modified": "2025-11-16"}, {"name": "hhd800.com@SONE-975", "filename": "hhd800.com@SONE-975.mp4", "ext": "MP4", "path": "SONE-975/hhd800.com@SONE-975.mp4", "folder": "SONE-975", "size": "7664.2 MB", "modified": "2025-11-16"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "SPSF-01/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "SPSF-01", "size": "1.9 MB", "modified": "2026-05-21"}, {"name": "hhd800.com@SPSF-01", "filename": "hhd800.com@SPSF-01.mp4", "ext": "MP4", "path": "SPSF-01/hhd800.com@SPSF-01.mp4", "folder": "SPSF-01", "size": "3908.6 MB", "modified": "2026-05-21"}, {"name": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等", "filename": "18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "ext": "MP4", "path": "SPSF-05/18+游戏大全(996gg.cc)-七龍珠H版-三國志H版-三國群淫傳等.mp4", "folder": "SPSF-05", "size": "1.9 MB", "modified": "2026-05-21"}, {"name": "hhd800.com@SPSF-05", "filename": "hhd800.com@SPSF-05.mp4", "ext": "MP4", "path": "SPSF-05/hhd800.com@SPSF-05.mp4", "folder": "SPSF-05", "size": "3978.4 MB", "modified": "2026-05-22"}, {"name": "ssis-816", "filename": "ssis-816.mp4", "ext": "MP4", "path": "ssis-816/ssis-816.mp4", "folder": "ssis-816", "size": "10534.9 MB", "modified": "2023-08-13"}, {"name": "苍 老 师 强 力 推 荐", "filename": "苍 老 师 强 力 推 荐.mp4", "ext": "MP4", "path": "ssis-816/苍 老 师 强 力 推 荐.mp4", "folder": "ssis-816", "size": "66.1 MB", "modified": "2023-08-13"}, {"name": "hhd800.com@SSIS-838", "filename": "hhd800.com@SSIS-838.mp4", "ext": "MP4", "path": "SSIS-838/hhd800.com@SSIS-838.mp4", "folder": "SSIS-838", "size": "6228.4 MB", "modified": "2023-09-26"}, {"name": "hhd800.com@STARS-825", "filename": "hhd800.com@STARS-825.mp4", "ext": "MP4", "path": "STARS-825/hhd800.com@STARS-825.mp4", "folder": "STARS-825", "size": "5682.7 MB", "modified": "2023-04-19"}, {"name": "SUPA-554", "filename": "SUPA-554.mp4", "ext": "MP4", "path": "SUPA-554.mp4", "folder": "", "size": "5051.4 MB", "modified": "2020-12-16"}, {"name": "ure-088", "filename": "ure-088.mp4", "ext": "MP4", "path": "ure-088/ure-088.mp4", "folder": "ure-088", "size": "10313.2 MB", "modified": "2022-12-10"}, {"name": "x u u 6 2 . c o m", "filename": "x u u 6 2 . c o m.mp4", "ext": "MP4", "path": "ure-088/x u u 6 2 . c o m.mp4", "folder": "ure-088", "size": "12.1 MB", "modified": "2022-12-10"}, {"name": "社 區 最 新 情 報", "filename": "社 區 最 新 情 報.mp4", "ext": "MP4", "path": "ure-088/社 區 最 新 情 報.mp4", "folder": "ure-088", "size": "14.4 MB", "modified": "2022-12-10"}, {"name": "hhd800.com@VOV-108", "filename": "hhd800.com@VOV-108.mp4", "ext": "MP4", "path": "VOV-108/hhd800.com@VOV-108.mp4", "folder": "VOV-108", "size": "3096.4 MB", "modified": "2023-06-29"}, {"name": "강남로 마사지샵", "filename": "강남로 마사지샵.mp4", "ext": "MP4", "path": "강남로 마사지샵/강남로 마사지샵.mp4", "folder": "강남로 마사지샵", "size": "2336.8 MB", "modified": "2026-05-27"}, {"name": "떡치는 교도소 여자 교도관과 비밀 섹스", "filename": "떡치는 교도소 여자 교도관과 비밀 섹스.mp4", "ext": "MP4", "path": "떡치는 교도소 여자 교도관과 비밀 섹스/떡치는 교도소 여자 교도관과 비밀 섹스.mp4", "folder": "떡치는 교도소 여자 교도관과 비밀 섹스", "size": "4923.9 MB", "modified": "2026-05-27"}];
 
 const searchInput  = document.getElementById('searchInput');
 const folderFilter = document.getElementById('folderFilter');
@@ -398,25 +193,14 @@ const container    = document.getElementById('videoContainer');
 const emptyMsg     = document.getElementById('emptyMsg');
 const visibleCount = document.getElementById('visibleCount');
 
-function setView(v) {
-  currentView = v;
-  document.getElementById('btnGrid').classList.toggle('active', v === 'grid');
-  document.getElementById('btnList').classList.toggle('active', v === 'list');
-  render();
-}
-
 function esc(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 function hl(text, q) {
   if (!q) return esc(text);
   const i = text.toLowerCase().indexOf(q.toLowerCase());
   if (i === -1) return esc(text);
-  return esc(text.slice(0,i)) + '<mark>' + esc(text.slice(i, i+q.length)) + '</mark>' + esc(text.slice(i+q.length));
-}
-function thumbHtml(v) {
-  if (v.thumb) return `<img src="${v.thumb}" alt="${esc(v.name)}" loading="lazy">`;
-  return `<div class="thumb-placeholder">▶</div>`;
+  return esc(text.slice(0,i)) + '<mark>' + esc(text.slice(i,i+q.length)) + '</mark>' + esc(text.slice(i+q.length));
 }
 
 function render() {
@@ -440,35 +224,19 @@ function render() {
   const groups = {};
   filtered.forEach(v => { (groups[v.folder || '(루트)'] ??= []).push(v); });
 
-  container.innerHTML = Object.entries(groups).map(([folder, vids]) => {
-    const items = currentView === 'grid'
-      ? `<div class="video-grid">${vids.map((v,i) => `
-          <div class="grid-item" style="animation-delay:${i*0.02}s">
-            <div class="thumb-wrap">
-              ${thumbHtml(v)}
-              <span class="thumb-ext">${esc(v.ext)}</span>
-            </div>
-            <div class="grid-info">
-              <div class="grid-name" title="${esc(v.filename)}">${hl(v.name, q)}</div>
-              <div class="grid-meta">
-                <span>${esc(v.size)}</span>
-                <span>${esc(v.modified)}</span>
-              </div>
-            </div>
-          </div>`).join('')}</div>`
-      : `<div class="video-list">${vids.map((v,i) => `
-          <div class="list-item" style="animation-delay:${i*0.015}s">
-            <div class="list-thumb">${thumbHtml(v)}</div>
-            <div class="list-name" title="${esc(v.filename)}">${hl(v.name, q)}</div>
-            <span class="list-ext">${esc(v.ext)}</span>
-            <span class="list-size">${esc(v.size)}</span>
-          </div>`).join('')}</div>`;
-
-    return `<div class="folder-section">
+  container.innerHTML = Object.entries(groups).map(([folder, vids]) => `
+    <div class="folder-section">
       <div class="folder-label">${esc(folder)}</div>
-      ${items}
-    </div>`;
-  }).join('');
+      <div class="video-list">
+        ${vids.map((v,i) => `
+          <div class="video-item" style="animation-delay:${i*0.015}s">
+            <span class="video-idx">${String(i+1).padStart(2,'0')}</span>
+            <span class="video-name" title="${esc(v.filename)}">${hl(v.name, q)}</span>
+            <span class="video-ext">${esc(v.ext)}</span>
+            <span class="video-size">${esc(v.size)}</span>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
 }
 
 searchInput.addEventListener('input', render);
